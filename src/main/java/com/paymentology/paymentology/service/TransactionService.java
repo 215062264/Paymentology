@@ -7,6 +7,8 @@ import com.opencsv.bean.MappingStrategy;
 import com.paymentology.paymentology.entity.Transaction;
 import com.paymentology.paymentology.csvPojo.TransactionCsvPojo;
 import com.paymentology.paymentology.repository.TransactionRepo;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -24,6 +26,8 @@ public class TransactionService {
 
     @Autowired
     TransactionRepo repo;
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public List convertCSVToList(MultipartFile file) {
 
@@ -51,6 +55,7 @@ public class TransactionService {
 
         } catch (Exception e) {
             e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return transactionList;
      }

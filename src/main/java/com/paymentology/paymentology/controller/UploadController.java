@@ -2,6 +2,8 @@ package com.paymentology.paymentology.controller;
 
 import com.paymentology.paymentology.entity.Transaction;
 import com.paymentology.paymentology.service.TransactionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,6 +17,8 @@ import java.util.*;
 
 @Controller
 public class UploadController {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     TransactionService service;
@@ -80,8 +84,9 @@ public class UploadController {
                 model.addAttribute("numOfDuplicates", numOfDuplicates);
 
             }catch (Exception e) {
-                model.addAttribute("message", "An error occurred while processing the CSV file." + "\n" + e.getMessage());
+                model.addAttribute("message", "An error occurred while processing the CSV file.");
                 model.addAttribute("status", false);
+                logger.info(e.getMessage());
             }
         }
         return "result-page";
