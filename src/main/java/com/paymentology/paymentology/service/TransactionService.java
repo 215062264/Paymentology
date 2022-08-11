@@ -106,10 +106,6 @@ public class TransactionService {
         return repo.saveAllAndFlush(list);
      }
 
-     public ArrayList<Transaction> getUnmatchedRecords(){
-        return repo.getUnmatchedRecords();
-     }
-
      //fetch list of transactions from database
      public Iterable<Transaction> getListOfTransactions(){
         return repo.findAll();
